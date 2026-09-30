@@ -325,6 +325,22 @@ function extractHubCloud(hubCloudUrl, baseMeta) {
   });
 }
 
+
+function is4KMeta(meta) {
+  if (!meta) return false;
+  const height = Number(meta.height || 0);
+  const title = String(meta.title || "").toLowerCase();
+
+  return (
+    height === 2160 ||
+    title.indexOf("2160p") >= 0 ||
+    title.indexOf("2160") >= 0 ||
+    title.indexOf("4k") >= 0 ||
+    title.indexOf("uhd") >= 0
+  );
+}
+
+
 // src/4khdhub/index.js
 var cheerio3 = require("cheerio-without-node-native");
 function getStreams(tmdbId, type, season, episode) {
@@ -366,15 +382,21 @@ function getStreams(tmdbId, type, season, episode) {
     const streamPromises = itemsToProcess.map((item) => __async(this, null, function* () {
       try {
         const sourceResult = yield extractSourceResults($, item);
+
+        // blvck Sync v0.4: expose only 2160p / 4K / UHD releases.
+        if (!sourceResult || !sourceResult.url || !is4KMeta(sourceResult.meta)) {
+          return [];
+        }
+
         if (sourceResult && sourceResult.url) {
           console.log(`[blvck Sync] Extracting from HubCloud: ${sourceResult.url}`);
           const extractedLinks = yield extractHubCloud(sourceResult.url, sourceResult.meta);
           return extractedLinks.map((link) => ({
-            name: `blvck Sync - ${link.source}${sourceResult.meta.height ? ` ${sourceResult.meta.height}p` : ""}`,
+            name: `blvck Sync - ${link.source} 2160p`,
             title: `${link.meta.title}
 ${formatBytes(link.meta.bytes || 0)}`,
             url: link.url,
-            quality: sourceResult.meta.height ? `${sourceResult.meta.height}p` : void 0,
+            quality: "2160p",
             behaviorHints: {
               bingeGroup: `blvck-sync-${link.source}`
             }
