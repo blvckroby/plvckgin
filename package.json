@@ -1,9 +1,0 @@
-{
-  "name": "blvck-sync",
-  "version": "0.1.0",
-  "private": true,
-  "type": "module",
-  "dependencies": {
-    "cheerio-without-node-native": "latest"
-  }
-}
