@@ -1,14 +1,14 @@
 {
   "name": "blvck Sync",
-  "version": "0.3.0",
-  "description": "Standalone 4K stream provider for Nuvio. Audio sync layer will be added after the video provider is confirmed working.",
+  "version": "0.4.0",
+  "description": "Standalone Nuvio provider filtered to 2160p / 4K / UHD streams.",
   "author": "local",
   "scrapers": [
     {
       "id": "blvck-sync",
       "name": "blvck Sync",
-      "description": "Standalone 4K video provider",
-      "version": "0.3.0",
+      "description": "4K / 2160p streams only",
+      "version": "0.4.0",
       "author": "local",
       "resources": [
         "stream"
