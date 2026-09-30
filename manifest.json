@@ -1,0 +1,40 @@
+{
+  "name": "blvck Sync",
+  "version": "0.2.0",
+  "description": "4K video provider with configurable Italian-audio DualSync adapter.",
+  "author": "local",
+  "scrapers": [
+    {
+      "id": "blvck-sync",
+      "name": "blvck Sync",
+      "description": "4K video + configurable Italian audio adapter",
+      "version": "0.2.0",
+      "author": "local",
+      "resources": [
+        "stream"
+      ],
+      "idPrefixes": [
+        "tmdb:",
+        "tt"
+      ],
+      "supportedTypes": [
+        "movie",
+        "series",
+        "tv"
+      ],
+      "filename": "providers/blvck-sync.js",
+      "enabled": true,
+      "contentLanguage": [
+        "it",
+        "en"
+      ],
+      "formats": [
+        "m3u8",
+        "mp4",
+        "mkv"
+      ],
+      "limited": false,
+      "supportsExternalPlayer": false
+    }
+  ]
+}
